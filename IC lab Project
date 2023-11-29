@@ -1,0 +1,205 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Candidate 
+
+{
+    char name[25];
+    char idCardType[20];
+    char idCardNumber[20];
+    char gender[10];
+    char state[25];
+    char city[25];
+    char hospital[50];
+};
+
+void takeCandidateDetails(struct Candidate *candidate) 
+
+{
+    printf("\nEnter Candidate Name: ");
+    scanf("%s", candidate->name);
+    printf("\n");
+
+    printf("Choose ID Card Type:\n");
+    printf("1. Aadhar\n");
+    printf("2. Pan Card\n");
+    printf("3. Voter ID\n");
+    printf("4. Driving License\n");
+    printf("5. Other\n");
+    printf("\n");
+
+    int idChoice;
+    printf("Enter your choice (1-5): ");
+    scanf("%d", &idChoice);
+     printf("\n");
+   
+    
+    switch (idChoice) 
+    
+    {
+        case 1:
+            strcpy(candidate->idCardType, "Aadhar");
+            break;
+        case 2:
+            strcpy(candidate->idCardType, "Pan Card");
+            break;
+        case 3:
+            strcpy(candidate->idCardType, "Voter ID");
+            break;
+        case 4:
+            strcpy(candidate->idCardType, "Driving License");
+            break;
+        case 5:
+            strcpy(candidate->idCardType, "Other");
+            break;
+        default:
+            strcpy(candidate->idCardType, "Unknown");
+            break;
+    }
+
+    printf("Enter ID Card Number: ");
+    scanf("%s", candidate->idCardNumber);
+    printf("\n");
+
+    printf("Enter Gender: ");
+    scanf("%s", candidate->gender);
+    printf("\n");
+    printf("\n\n\n Now press 2 to fill the vaccination detail of:  %s\n\n\n",candidate->name);
+    printf("\n");
+    
+}
+
+void takeVaccinationDetails(struct Candidate *candidate) 
+
+{
+    printf("Enter State: ");
+    scanf(" %s", candidate->state);
+    printf("\n");
+
+    printf("Enter City: ");
+    scanf(" %s", candidate->city);
+    printf("\n");
+
+    printf("Enter Hospital Name: ");
+    scanf(" %s", candidate->hospital);
+    printf("\n");
+}
+
+void printReceipt(const struct Candidate *candidate) 
+
+{
+    printf("\n\n\n ---------- Vaccination Receipt ------------\n\n\n");
+    printf("Candidate Name: %s\n", candidate->name);
+    printf("ID Card Type: %s\n", candidate->idCardType);
+    printf("ID Card Number: %s\n", candidate->idCardNumber);
+    printf("Gender: %s\n", candidate->gender);
+    printf("State: %s\n", candidate->state);
+    printf("City: %s\n", candidate->city);
+    printf("Hospital Name: %s\n", candidate->hospital);
+    printf("\n\nVaccination successfully registered!!!\n\n");
+}
+
+int main() 
+
+{
+    int choice = 0;
+    int numCandidates = 0; 
+    struct Candidate candidates[100];
+
+    while (1) 
+    
+    {
+        printf("\nCovid Vaccination Registration Portal\n");
+        printf("1. Take Candidate Details\n");
+        printf("2. Take Vaccination Details\n");
+        printf("3. Print Receipt\n");
+        printf("4. Exit\n\n");
+        printf("\n\nEnter your choice: ");
+        scanf("%d", &choice);
+        printf("\n");
+
+        if (choice == 1) 
+        
+        {
+            if (numCandidates < 10) 
+            
+            { 
+                takeCandidateDetails(&candidates[numCandidates]);
+                numCandidates++;
+            } 
+            
+            else 
+            
+            {
+                printf("Maximum number of candidates reached.\n");
+            }
+
+        } 
+        
+        else if (choice == 2) 
+        
+        {
+            if (numCandidates > 0) 
+            
+            { 
+                takeVaccinationDetails(&candidates[numCandidates - 1]);
+            } 
+            
+            else 
+            
+            {
+                printf("Please enter candidate details first.\n");
+            }
+
+        } 
+        
+        else if (choice == 3) 
+        
+        {
+            if (numCandidates > 0) 
+            
+            { 
+                printf("Enter Candidate Name to print receipt: ");
+                char searchName[100];
+                scanf("%s", searchName);
+
+                int i;
+                for (i = 0; i < numCandidates; i++) 
+                
+                {
+                    if (strcmp(searchName, candidates[i].name) == 0) 
+                    
+                    {
+                        printReceipt(&candidates[i]);
+                        break;
+                    }
+
+                }
+
+                if (i == numCandidates) 
+                
+                {
+                    printf("Candidate with name '%s' not found.\n", searchName);
+                }
+
+            } 
+            
+            else 
+            
+            {
+                printf("Please enter candidate details first.\n");
+            }
+
+        } 
+        
+        else if (choice == 4) 
+        
+        {
+            printf("Thank You !! \n\n IC Project - VACCINE REGISTRATION SYSTEM \n\n Aryan Prasad (B23CH1010) \n Abhijeet Kumar (B23CI1001) \n TVRL Ganesh (B23CM1043) \n CHANDAVATH AKHIL (B23EE1013) \n\n");
+            break;
+        }
+    }
+
+
+    return 0;
+}
