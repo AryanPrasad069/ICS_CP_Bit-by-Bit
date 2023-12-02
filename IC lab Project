@@ -2,18 +2,18 @@
 #include <string.h>
 
 struct Candidate {
-    char name[25];
-    char idCardType[20];
-    char idCardNumber[20];
-    char gender[10];
-    char state[25];
-    char city[25];
-    char hospital[50];
+    char name[50];
+    char idCardType[50];
+    char idCardNumber[50];
+    char gender[20];
+    char state[50];
+    char city[50];
+    char hospital[100];
 };
 
 void takeCandidateDetails(struct Candidate *candidate) {
     printf("\nEnter Candidate Name: ");
-    scanf("%s", candidate->name);
+    scanf(" %[^\n]", candidate->name);
     printf("\n");
 
     printf("Choose ID Card Type:\n");
@@ -56,7 +56,6 @@ void takeCandidateDetails(struct Candidate *candidate) {
 
     printf("Enter Gender: ");
     scanf(" %s", candidate->gender);
-    //printf("\n\nPress 2 to fill the vaccination details for: %s\n\n", candidate->name);
     printf("\n");
 }
 
@@ -111,9 +110,9 @@ int main() {
             }
         } else if (choice == 2) {
             if (numCandidates > 0) {
-                 printf("Enter Candidate Name to fill vaccination detail: ");
+                printf("Enter Candidate Name to fill vaccination detail: ");
                 char searchName[25];
-                scanf("%s", searchName);
+                scanf(" %[^\n]", searchName);
                 printf("\n");
                 int i;
                 for (i = 0; i < numCandidates; i++) {
@@ -129,7 +128,7 @@ int main() {
             if (numCandidates > 0) {
                 printf("Enter Candidate Name to print receipt: ");
                 char searchName[25];
-                scanf("%s", searchName);
+                scanf(" %[^\n]", searchName);
 
                 int i;
                 for (i = 0; i < numCandidates; i++) {
@@ -153,3 +152,4 @@ int main() {
 
     return 0;
 }
+
