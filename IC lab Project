@@ -81,7 +81,7 @@ void takeVaccinationDetails(struct Candidate *candidate)
     printf("\n");
 }
 
-void printReceipt(const struct Candidate *candidate) 
+void printReceipt(struct Candidate *candidate) 
 
 {
     printf("\n\n\n ---------- Vaccination Receipt ------------\n\n\n");
